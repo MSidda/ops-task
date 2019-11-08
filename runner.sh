@@ -1,7 +1,19 @@
-#!/bin/sh
+daemon off;
+pid /var/lib/nginx/nginx.pid;
 
-# Replace the hostname in the container
-sed -i.bak 's/HOSTNAME/'"$HOSTNAME"'/g' /www/data/index.html
+events {
+  worker_connections 1024;
+}
 
-# Startup the cmd
-exec "$@"
+http {
+  include /etc/nginx/mime.types;
+  index index.html;
+
+  server {
+    listen *:80;
+    
+    location / {
+      root /www-data;
+    }
+  }
+}
