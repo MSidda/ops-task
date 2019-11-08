@@ -8,5 +8,6 @@ spec:
   containers:
   - name: my-ubuntu
     image: ubuntu
+    command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
     ports:
     - containerPort: 80
