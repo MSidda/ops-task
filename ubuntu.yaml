@@ -6,7 +6,7 @@ metadata:
     run: my-ubuntu
 spec:
   containers:
-  - name: my-ubuntu
+  - name: node
     image: sysgaininc/jenkinskube:latest
     command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
     ports:
