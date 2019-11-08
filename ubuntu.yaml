@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: ubuntu-pod
   labels:
-    run: my-nginx
+    run: my-ubuntu
 spec:
   containers:
   - name: my-ubuntu
