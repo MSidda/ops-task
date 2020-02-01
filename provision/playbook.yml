@@ -1,0 +1,19 @@
+---
+    - hosts: localhost
+      become: yes
+      tasks:
+        - name: Create a Docker group
+          group: name=docker state=present
+        - name: create user
+          user:
+            name: demo
+            state: present
+        - name: set timezone to asia/kolkata
+          timezone:
+            name: Asia/Kolkata
+        - name: Install Docker
+          apt: name=docker-ce state=present
+        - name: Enable and Start Docker Daemon
+          service: name=docker state=started enabled=yes
+        - hostname:
+            name: demo-ops 

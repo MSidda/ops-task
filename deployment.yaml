@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ops-demo
+  namespace: demo-ops
+  labels:
+    app: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      containers:
+      - name: myapp
+        image: siddareddy/test:v1
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: 500m
+            memory: 100Mi
+          requests:
+            cpu: 250m
+            memory: 50Mi
+        command: ['sh', '-c', "touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600"]
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
